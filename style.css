@@ -62,8 +62,6 @@ header {
   scrollbar-width: none;
 
   cursor: grabbing;
-
-  display: flex;
 }
 
 .content {
