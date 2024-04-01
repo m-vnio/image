@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+    <title>Imagen</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <div id="root">
+        <header>
+            <input id="urlImage" type="search" placeholder="url de imagen">
+            <label>
+                <input id="lock" type="checkbox">
+            </label>
+        </header>
+        <div id="container" class="container">
+            <div class="content">
+                <img id="image"
+                    src="./image.webp"
+                    alt="">
+            </div>
+        </div>
+        <footer>
+            <input id="range" type="range" min="10" value="100" max="1000">
+        </footer>
+    </div>
+    <script src="./lib.js"></script>
+    <script src="./app.js"></script>
+
+</body>
+
+</html>
