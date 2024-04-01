@@ -68,7 +68,7 @@ header {
   background: green;
   display: grid;
 
-  margin: 500%;
+  padding: 500%;
   display: flex;
   justify-content: center;
   align-items: center;
