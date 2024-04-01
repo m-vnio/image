@@ -60,14 +60,17 @@ header {
   overflow: auto;
 
   scrollbar-width: none;
+
+  cursor:grabbing;
 }
 
 .content {
   padding: 150%;
 
   & img {
-    --size-img: 100px;
+    --size-img: 300px;
     width: var(--size-img);
+    pointer-events: none;
   }
 }
 
