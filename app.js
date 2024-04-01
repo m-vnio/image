@@ -15,7 +15,6 @@ $elements.range.addEventListener('input', ()=> {
     $elements.image.setAttribute('style', `--size-img:${ $elements.range.value }px`)
 })
 
-$elements.image.scrollIntoView({ block: "center", inline: "center" })
 
 let move = false
 let coordenadaInicialX
@@ -75,3 +74,5 @@ $elements.container.addEventListener('wheel', e => {
 
 
 addEventListener('contextmenu', e => e.preventDefault())
+
+$elements.image.scrollIntoView({ block: "center", inline: "center" })

@@ -61,11 +61,19 @@ header {
 
   scrollbar-width: none;
 
-  cursor:grabbing;
+  cursor: grabbing;
+
+  display: flex;
 }
 
 .content {
-  padding: 150%;
+  background: green;
+  display: grid;
+
+  margin: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   & img {
     --size-img: 300px;
