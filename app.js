@@ -8,7 +8,7 @@ $elements.lock.addEventListener('input', ()=> {
 })
 
 $elements.urlImage.addEventListener('input', ()=> {
-    $elements.image.setAttribute('src', $elements.urlImage.value)
+    $elements.image.children[0].setAttribute('src', $elements.urlImage.value)
 })
 
 $elements.range.addEventListener('input', ()=> {

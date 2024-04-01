@@ -1,4 +1,4 @@
-oh* {
+* {
   margin: 0;
   padding: 0;
 
@@ -62,24 +62,24 @@ header {
   scrollbar-width: none;
 
   cursor: grabbing;
-background: red;
-padding:10px;
+
+  display: flex;
 }
 
 .content {
-  background: green;
+  --size-img: 300px;
   display: grid;
 
-  margin: 500%;
-  padding:10px;
-
+  margin: 200%;
   display: flex;
   justify-content: center;
   align-items: center;
 
+  min-width: var(--size-img);
+  min-height: var(--size-img);
+
   & img {
-    --size-img: 300px;
-    width: var(--size-img);
+    width: 100%;
     pointer-events: none;
   }
 }
