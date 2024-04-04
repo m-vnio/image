@@ -8,11 +8,11 @@ $elements.lock.addEventListener('input', ()=> {
 })
 
 $elements.urlImage.addEventListener('input', ()=> {
-    $elements.image.children[0].setAttribute('src', $elements.urlImage.value)
+    $elements.image.children[0].setAttribute('src', $elements.urlImage.value.trim() || 'https://picsum.photos/1000/1000')
 })
 
 $elements.range.addEventListener('input', ()=> {
-    $elements.image.setAttribute('style', `--size-img:${ $elements.range.value }px`)
+    $elements.image.style.transform = 'scale(' + (parseInt($elements.range.value) / parseInt($elements.range.max.slice(0, -1))) + ')';
 })
 
 
@@ -56,16 +56,23 @@ $elements.container.addEventListener('mouseup', e => {
     $elements.container.setAttribute('style', '')
 })
 
+$elements.container.addEventListener('mouseleave', ()=> {
+    if( move ) {
+        move = false
+        $elements.container.setAttribute('style', '')
+    }
+})
+
 
 const customEventInput = new CustomEvent('input')
 
 $elements.container.addEventListener('wheel', e => {
     if( move ) {
         if( e.deltaY > 0 ) {
-            $elements.range.value = parseInt( $elements.range.value ) - 50
+            $elements.range.value = parseInt( $elements.range.value ) - 2000000000
             
         } else {
-            $elements.range.value = parseInt( $elements.range.value ) + 50
+            $elements.range.value = parseInt( $elements.range.value ) + 2000000000
         }
     
         $elements.range.dispatchEvent( customEventInput )
@@ -76,3 +83,57 @@ $elements.container.addEventListener('wheel', e => {
 addEventListener('contextmenu', e => e.preventDefault())
 
 $elements.image.scrollIntoView({ block: "center", inline: "center" })
+
+
+
+let imagen = $elements.container
+let escala = 1;
+let escala2 = 1
+
+let ultimaDistancia = 0;
+let ultimaEscala = 1
+
+
+// Detectar inicio del gesto de pellizco
+imagen.addEventListener('touchstart', function(e) {
+    const touches = e.touches;
+    if (touches.length === 2) {
+
+        ultimaDistancia = Math.hypot(
+            e.touches[0].clientX - e.touches[1].clientX,
+            e.touches[0].clientY - e.touches[1].clientY
+        );
+
+        e.preventDefault();
+
+    }
+});
+
+// Detectar cambio del gesto de pellizco
+imagen.addEventListener('touchmove', function(e) {
+    const touches = e.touches;
+    if (touches.length === 2) {
+ 
+        e.preventDefault();
+
+        const distanciaActual = Math.hypot(
+            e.touches[0].clientX - e.touches[1].clientX,
+            e.touches[0].clientY - e.touches[1].clientY
+        );
+
+        const escalaRelativa = distanciaActual / ultimaDistancia;
+
+        escala *= escalaRelativa;
+
+        const number  = parseInt(`1${'0'.repeat(10)}`)
+        const number2 = parseInt( escala.toString().split('.').map(num => num.slice(0, 10)).join('') )
+
+
+        ultimaDistancia = distanciaActual;
+        $elements.range.value = number2
+
+        $elements.image.style.transform = `scale(${ number2 / number })`;
+        
+    }
+});
+

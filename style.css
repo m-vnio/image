@@ -42,6 +42,15 @@ header {
   & input {
     width: 100%;
     padding: 0 20px;
+
+    background: #ffffff;
+    color: #000000;
+
+
+    border: none;
+    outline: none;
+
+    border-radius: 15px;
   }
 
   & label {
@@ -68,15 +77,19 @@ header {
 
 .content {
   --size-img: 300px;
+  --scale-img: 1;
   display: grid;
 
-  margin: 200%;
+  margin: 1000%;
   display: flex;
   justify-content: center;
   align-items: center;
 
   min-width: var(--size-img);
   min-height: var(--size-img);
+
+  transform: scale(--scale-img);
+
 
   & img {
     width: 100%;
