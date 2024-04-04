@@ -46,6 +46,7 @@ header {
 
     border: none;
     outline: none;
+    background: none;
   }
 
   & label {

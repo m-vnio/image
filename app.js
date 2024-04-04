@@ -80,10 +80,39 @@ $elements.container.addEventListener('wheel', e => {
 })
 
 
-addEventListener('contextmenu', e => e.preventDefault())
+$elements.container.addEventListener('dblclick', () => {
+    $elements.image.scrollIntoView({ behavior: 'smooth', block: "center", inline: "center" })
+})
+
+
+$elements.container.addEventListener('contextmenu', e => {
+    
+    e.preventDefault()
+    $elements.image.scrollIntoView({ behavior: 'smooth', block: "center", inline: "center" })
+
+    navigator.clipboard.read().then(data => {
+        // Itera a través de los items del portapapeles
+        data.forEach(item => {
+            
+            const type = item.types.find( type => type.includes('image'))
+
+            if( type ) {
+
+                item.getType( type ).then( blob => {
+                    $elements.image.children[0].setAttribute('src', URL.createObjectURL(blob))
+                })
+
+            }
+          
+        });
+    }).catch(err => {
+        console.error('No se pudo leer el portapapeles: ', err);
+    });
+
+})
+
 
 $elements.image.scrollIntoView({ block: "center", inline: "center" })
-
 
 
 let imagen = $elements.container
@@ -137,3 +166,17 @@ imagen.addEventListener('touchmove', function(e) {
     }
 });
 
+
+document.addEventListener('paste', e => {
+    // Obtiene el objeto del evento
+    const items = (e.clipboardData || e.originalEvent.clipboardData).items;
+    // Itera a través de los items del portapapeles
+    for (let index in items) {
+        const item = items[index];
+        // Verifica si es una imagen
+        if (item.kind === 'file' && item.type.includes('image')) {
+            const blob = item.getAsFile();
+            setTimeout(()=> $elements.image.children[0].setAttribute('src', URL.createObjectURL(blob))) 
+        }
+    }
+});
